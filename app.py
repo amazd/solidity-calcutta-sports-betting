@@ -1,7 +1,4 @@
 import streamlit as st
-import numpy as np
-import pandas as pd
-import altair as alt
 import os
 import json
 from web3 import Web3
@@ -19,7 +16,6 @@ w3 = Web3(Web3.HTTPProvider(os.getenv("WEB3_PROVIDER_URI")))
 
 # Define the load_contract function
 def load_contract():
-    
     with open(Path('certificate_abi.json')) as f:
         certificate_abi = json.load(f)
 
@@ -37,16 +33,14 @@ def load_contract():
 #load contract
 contract=load_contract()
 
-
 st.title("March Madness Tournament!")
 st.write("So you think you can pick the winner of this year's tourney? :sunglasses:")
 st.write("You can bid on each team that you think will win. Buyer of the winning team will win the entire pool.")
 
-#teams = contract.functions.show
 now = int(datetime.now().timestamp())
-team_list = contract.functions.showTeams().call()
+team_list = contract.functions.showTeamNames().call()
 st.write(f"The current teams in contention are: {team_list}")
-#contract_owner = contract.functions.contractOwner().call()
+
 #Dashboard Functions    
 for i, team in enumerate(team_list):
     auction_result = contract.functions.auctionResult(i).call()
@@ -55,22 +49,22 @@ for i, team in enumerate(team_list):
     high_bid = auction_result[2]
     st.write(f"Team Name: {team}, which is number {i}:")
     if (auction_end_time == 0):
-        st.write("Auction has not started yet");
+        st.write("Auction has not started yet")
     else:
         if(now > auction_end_time):
-            st.write("Auction is over!");
+            st.write("Auction is over!")
             st.write(f"Winning Bidder: {highest_bidder}")
         else:
             st.write(f"Auction Time Remaining(sec): {auction_end_time-now}")
             st.write(f"Current Highest Bidder: {highest_bidder}")
         st.write(f"Highest Bid: {high_bid}")
 
-bidvalue = 0
-
 #Button for making a bid
+accounts = w3.eth.accounts
+account = st.selectbox("Select which wallet to use", options=accounts)
 teamId = st.selectbox("Which team are you bidding for?", range(len(team_list)), format_func=lambda x: team_list[x])
-
 bidvalue = st.text_input("Bid Amount in Wei?")
+
 if st.button("bid"):  
-    contract.functions.bid(int(teamId)).transact({"from": "0xac4C986A98E3C28f880cfa9cd0D0b41891308037", "value": bidvalue, "gasLimit": 3000000})
+    contract.functions.bidForTeamId(int(teamId)).transact({"from": account, "value": bidvalue})
 

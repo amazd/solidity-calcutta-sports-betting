@@ -43,6 +43,25 @@
 		"type": "event"
 	},
 	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "winner",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			}
+		],
+		"name": "winningPaidOut",
+		"type": "event"
+	},
+	{
 		"inputs": [
 			{
 				"internalType": "string",
@@ -50,8 +69,27 @@
 				"type": "string"
 			}
 		],
-		"name": "addTeam",
+		"name": "addTeamName",
 		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_teamId",
+				"type": "uint256"
+			}
+		],
+		"name": "auctionHasNotEndedForTeamId",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
 		"stateMutability": "nonpayable",
 		"type": "function"
 	},
@@ -97,7 +135,7 @@
 				"type": "uint256"
 			}
 		],
-		"name": "bid",
+		"name": "bidForTeamId",
 		"outputs": [],
 		"stateMutability": "payable",
 		"type": "function"
@@ -117,7 +155,7 @@
 	},
 	{
 		"inputs": [],
-		"name": "showTeams",
+		"name": "showTeamNames",
 		"outputs": [
 			{
 				"internalType": "string[]",
@@ -136,7 +174,7 @@
 				"type": "uint256"
 			}
 		],
-		"name": "teams",
+		"name": "teamNames",
 		"outputs": [
 			{
 				"internalType": "string",
@@ -155,7 +193,7 @@
 				"type": "uint256"
 			}
 		],
-		"name": "withdrawLosingBids",
+		"name": "withdrawLosingBidsForTeamId",
 		"outputs": [
 			{
 				"internalType": "bool",
@@ -164,6 +202,19 @@
 			}
 		],
 		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "withdrawWinning",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "nonpayable",
 		"type": "function"
 	}
 ]

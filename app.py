@@ -4,7 +4,8 @@ import json
 from web3 import Web3
 from pathlib import Path
 from dotenv import load_dotenv
-from datetime import datetime 
+from datetime import datetime
+from streamlit_autorefresh import st_autorefresh
 
 load_dotenv('api.env')
 
@@ -32,6 +33,7 @@ def load_contract():
 
 #load contract
 contract=load_contract()
+count = st_autorefresh(interval=1000)
 
 st.title("March Madness Tournament!")
 st.write("So you think you can pick the winner of this year's tourney? :sunglasses:")

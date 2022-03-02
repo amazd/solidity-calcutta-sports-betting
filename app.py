@@ -7,8 +7,9 @@ import json
 from web3 import Web3
 from pathlib import Path
 from dotenv import load_dotenv
+from datetime import datetime 
 
-load_dotenv()
+load_dotenv('api.env')
 
 #Define and connect a new Web3 provider
 w3 = Web3(Web3.HTTPProvider(os.getenv("WEB3_PROVIDER_URI")))
@@ -41,36 +42,35 @@ st.title("March Madness Tournament!")
 st.write("So you think you can pick the winner of this year's tourney? :sunglasses:")
 st.write("You can bid on each team that you think will win. Buyer of the winning team will win the entire pool.")
 
-teams = contract.functions.show
-st.write("The current teams in contention are:")
+#teams = contract.functions.show
+now = int(datetime.now().timestamp())
+team_list = contract.functions.showTeams().call()
+st.write(f"The current teams in contention are: {team_list}")
+#contract_owner = contract.functions.contractOwner().call()
+#Dashboard Functions    
+for i, team in enumerate(team_list):
+    auction_result = contract.functions.auctionResult(i).call()
+    auction_end_time = int(auction_result[0])
+    highest_bidder = auction_result[1]
+    high_bid = auction_result[2]
+    st.write(f"Team Name: {team}, which is number {i}:")
+    if (auction_end_time == 0):
+        st.write("Auction has not started yet");
+    else:
+        if(now > auction_end_time):
+            st.write("Auction is over!");
+            st.write(f"Winning Bidder: {highest_bidder}")
+        else:
+            st.write(f"Auction Time Remaining(sec): {auction_end_time-now}")
+            st.write(f"Current Highest Bidder: {highest_bidder}")
+        st.write(f"Highest Bid: {high_bid}")
 
-#round1winners = st.multiselect(
-    #"")
-    
-teamId=1
-auction_result = contract.functions.auctionResult(0).call()
-contract_owner = contract.functions.contractOwner.call()
-#st.write(f"{auction_result}")
-#st.write(f"{contract_owner}")
+bidvalue = 0
 
-#auction_end_time = auction_result[0]
-#st.write(f"Auction End Time {auction_end_time}")
+#Button for making a bid
+teamId = st.selectbox("Which team are you bidding for?", range(len(team_list)), format_func=lambda x: team_list[x])
 
-#st.code(contract.abi[7]["outputs"][0])
-st.write("Current Highest Bidder")
-st.code(contract.abi[7]["outputs"][1])
-st.write("Current Highest Bid")
-st.code(contract.abi[7]["outputs"][2])
-        #["outputs"]["highestBidder"])
-
-
-_teamId = st.text_input("Which team are you bidding for?")
-bidvalue = st.text_input("Bid Amount?")
+bidvalue = st.text_input("Bid Amount in Wei?")
 if st.button("bid"):  
-    #contract.functions.bid(int(_teamId))
-    contract.functions.bid(int(_teamId)).transact({"value": bidvalue})
-    
-    
-#how to incorporate the value amount?
-
+    contract.functions.bid(int(teamId)).transact({"from": "0xac4C986A98E3C28f880cfa9cd0D0b41891308037", "value": bidvalue, "gasLimit": 3000000})
 

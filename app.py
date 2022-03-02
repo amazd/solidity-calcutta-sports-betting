@@ -38,6 +38,7 @@ def load_contract():
 contract=load_contract()
 count = st_autorefresh(interval=1000)
 
+st.image("mm.jpg")
 st.title("March Madness Tournament!")
 st.write("So you think you can pick the winner of this year's tourney? :sunglasses:")
 
@@ -68,7 +69,7 @@ for i, team in enumerate(team_list):
     auction_result = contract.functions.auctionResult(i).call()
     auction_end_time = int(auction_result[0])
     highest_bidder = auction_result[1]
-    high_bid = auction_result[2]
+    high_bid = int(auction_result[2])
     st.write(f"Team Name: {team}")
     if (auction_end_time == 0):
         st.write("Auction has not started yet")
@@ -87,7 +88,7 @@ st.sidebar.header("Make a Bid")
 accounts = w3.eth.accounts
 account = st.sidebar.selectbox("Select which wallet to use", options=accounts)
 teamId = st.sidebar.selectbox("Which team are you bidding for?", range(len(team_list)), format_func=lambda x: team_list[x])
-bidvalue = st.sidebar.text_input("Bid Amount in Wei?")
+bidvalue = st.sidebar.text_input("Bid Amount in Wei")
 
 if st.sidebar.button("Make Bid"):  
     contract.functions.bidForTeamId(int(teamId)).transact({"from": account, "value": bidvalue})

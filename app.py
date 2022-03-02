@@ -47,35 +47,11 @@ teams = pd.read_csv(
     index_col="school"
 )
 
-for i in range(0,9):
-    st.image(teams["logos"][i], width=50) 
-
-
-#teams["lon"]=teams["lon"].astype(float)
-#teams["lat"]=teams["lat"].astype(float)
-
-#Force the logo string to behave as a list
-#teams['logos'] = teams['logos'].apply(lambda x: eval(x))
-#logo = teams['logos'][0]
-
-#fig = go.Figure(data=go.Choropleth(
-    #locations=teams['city'],
-    #locationmode = 'USA-states',
-    #marker_line_color='white'
-#))
-
-#fig.add_layout_image(
-    #dict(
-        #source=logo,
-        #xref="paper", yref="paper",
-        #x=.95, y=.1,
-        #sizex=0.25, sizey=0.25,
-        #xanchor="right", yanchor="bottom"
-#    )
-#)
+#Logo list
+st.image([teams["logos"][0], teams["logos"][1], teams["logos"][2], teams["logos"][3], teams["logos"][4], teams["logos"][5], teams["logos"][6], teams["logos"][7], teams["logos"][8]], width=50)
 
 #Map of Colleges
-#st.map(teams)
+st.map(teams)
 
 
 st.write("You can bid on each team that you think will win. Buyer of the winning team will win the entire pool.")

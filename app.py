@@ -62,7 +62,7 @@ team_list = contract.functions.showTeamNames().call()
 
 st.header("Dashboard")
 
-st.write(f"The current teams you can bid on are:  {', '.join(team_list)}")
+st.write(f"The teams that are in the pool are:  {', '.join(team_list)}")
 
 totalpot = 0
 
@@ -107,6 +107,6 @@ if st.sidebar.button("Make Bid"):
 if st.sidebar.button("Reimburse for Losing Bids"):  
     contract.functions.withdrawLosingBidsForTeamId(int(teamId)).transact({"from": account})
     
-if st.sidebar.button("Give the man his money"):
+if st.sidebar.button("Pay that Man his Money"):
     contract.functions.withdrawWinning().transact()
 

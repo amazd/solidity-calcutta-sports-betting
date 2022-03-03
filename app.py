@@ -69,8 +69,8 @@ for i, team in enumerate(team_list):
     auction_result = contract.functions.auctionResult(i).call()
     auction_end_time = int(auction_result[0])
     highest_bidder = auction_result[1]
-    high_bid = int(auction_result[2])
-    st.write(f"Team Name: {team}")
+    high_bid = w3.fromWei(int(auction_result[2]),'ether')
+    st.subheader(f"Team Name: {team}")
     if (auction_end_time == 0):
         st.write("Auction has not started yet")
     else:
@@ -86,16 +86,22 @@ for i, team in enumerate(team_list):
 
 st.sidebar.header("Make a Bid")
 accounts = w3.eth.accounts
-account = st.sidebar.selectbox("Select which wallet to use", options=accounts)
+newaccount={}
+for account in accounts:
+    accbal = round(w3.fromWei(w3.eth.get_balance(account),'ether'), 2)
+    accbalstring = "({balance}) {account}".format(balance = accbal, account = account)
+    newaccount.update({account: accbalstring})
+#account = st.sidebar.selectbox("Select which wallet to use", options=accounts)
+account = st.sidebar.selectbox("Which wallet?", accounts, format_func=lambda x: newaccount[x])
 teamId = st.sidebar.selectbox("Which team?", range(len(team_list)), format_func=lambda x: team_list[x])
-bidvalue = st.sidebar.text_input("Bid Amount in Wei")
+bidvalue = w3.toWei(st.sidebar.number_input("Bid Amount in Eth"),'ether')
 
 if st.sidebar.button("Make Bid"):  
-    contract.functions.bidForTeamId(int(teamId)).transact({"from": account, "value": bidvalue})
+    contract.functions.bidForTeamId(int(teamId)).transact({"from": account, "value": int(bidvalue)})
 
 if st.sidebar.button("Reimubrse for Losing Bids"):  
-    contract.functions.withdrawLosingBidsForTeamId(int(teamId)).transact({"to": account})
+    contract.functions.withdrawLosingBidsForTeamId(int(teamId)).transact({"from": account})
     
-if st.sidebar.button("Gimme my winnings"):
-    contract.functions.withdrawWinning().transact({"to": account})
+if st.sidebar.button("Give the man his money"):
+    contract.functions.withdrawWinning().transact()
 

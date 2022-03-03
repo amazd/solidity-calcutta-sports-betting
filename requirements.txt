@@ -5,7 +5,5 @@ pandas
 plotly
 matplotlib
 streamlit_autorefresh
-datetime
-dotenv
-from pathlib import Path
 web3
+dotenv

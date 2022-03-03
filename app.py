@@ -55,14 +55,16 @@ st.image([teams["logos"][0], teams["logos"][1], teams["logos"][2], teams["logos"
 st.map(teams)
 
 
-st.write("You can bid on each team that you think will win. Buyer of the winning team will win the entire pool.")
+st.write("You can bid on each team that you think will win.  Buyer of the winning team will win the entire pool!")
 
 now = int(datetime.now().timestamp())
 team_list = contract.functions.showTeamNames().call()
 
 st.header("Dashboard")
 
-st.write(f"The current teams in contention are: {team_list}")
+st.write(f"The current teams you can bid on are:  {', '.join(team_list)}")
+
+totalpot = 0
 
 #Dashboard Functions    
 for i, team in enumerate(team_list):
@@ -70,6 +72,7 @@ for i, team in enumerate(team_list):
     auction_end_time = int(auction_result[0])
     highest_bidder = auction_result[1]
     high_bid = w3.fromWei(int(auction_result[2]),'ether')
+    totalpot = totalpot + high_bid
     st.subheader(f"Team Name: {team}")
     if (auction_end_time == 0):
         st.write("Auction has not started yet")
@@ -82,6 +85,8 @@ for i, team in enumerate(team_list):
             st.write(f"Current Highest Bidder: {highest_bidder}")
         st.write(f"Highest Bid: {high_bid}")
 
+st.subheader(f"The total pot is Ξ{round(totalpot,2)}!!")
+        
 #Button for making a bid
 
 st.sidebar.header("Make a Bid")
@@ -89,7 +94,7 @@ accounts = w3.eth.accounts
 newaccount={}
 for account in accounts:
     accbal = round(w3.fromWei(w3.eth.get_balance(account),'ether'), 2)
-    accbalstring = "({balance}) {account}".format(balance = accbal, account = account)
+    accbalstring = "(Ξ{balance}) {account}".format(balance = accbal, account = account)
     newaccount.update({account: accbalstring})
 #account = st.sidebar.selectbox("Select which wallet to use", options=accounts)
 account = st.sidebar.selectbox("Which wallet?", accounts, format_func=lambda x: newaccount[x])

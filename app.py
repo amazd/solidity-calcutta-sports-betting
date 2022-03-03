@@ -99,7 +99,7 @@ bidvalue = w3.toWei(st.sidebar.number_input("Bid Amount in Eth"),'ether')
 if st.sidebar.button("Make Bid"):  
     contract.functions.bidForTeamId(int(teamId)).transact({"from": account, "value": int(bidvalue)})
 
-if st.sidebar.button("Reimubrse for Losing Bids"):  
+if st.sidebar.button("Reimburse for Losing Bids"):  
     contract.functions.withdrawLosingBidsForTeamId(int(teamId)).transact({"from": account})
     
 if st.sidebar.button("Give the man his money"):

@@ -107,6 +107,6 @@ if st.sidebar.button("Make Bid"):
 if st.sidebar.button("Reimburse for Losing Bids"):  
     contract.functions.withdrawLosingBidsForTeamId(int(teamId)).transact({"from": account})
     
-if st.sidebar.button("Pay that Man his Money"):
+if st.sidebar.button("Pay them their Money"):
     contract.functions.withdrawWinning().transact()
 

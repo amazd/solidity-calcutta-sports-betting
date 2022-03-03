@@ -87,11 +87,15 @@ for i, team in enumerate(team_list):
 st.sidebar.header("Make a Bid")
 accounts = w3.eth.accounts
 account = st.sidebar.selectbox("Select which wallet to use", options=accounts)
-teamId = st.sidebar.selectbox("Which team are you bidding for?", range(len(team_list)), format_func=lambda x: team_list[x])
+teamId = st.sidebar.selectbox("Which team?", range(len(team_list)), format_func=lambda x: team_list[x])
 bidvalue = st.sidebar.text_input("Bid Amount in Wei")
 
 if st.sidebar.button("Make Bid"):  
     contract.functions.bidForTeamId(int(teamId)).transact({"from": account, "value": bidvalue})
 
-
+if st.sidebar.button("Reimubrse for Losing Bids"):  
+    contract.functions.withdrawLosingBidsForTeamId(int(teamId)).transact({"to": account})
+    
+if st.sidebar.button("Gimme my winnings"):
+    contract.functions.withdrawWinning().transact({"to": account})
 

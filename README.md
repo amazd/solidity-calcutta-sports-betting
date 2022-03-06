@@ -1,6 +1,6 @@
 # March MadnETH 
 ## Calcutta Betting with Smart Contracts
-!![This is an image](https://images.rivals.com/image/upload/f_auto,q_auto,t_large/v0wuctkikgvrerd2pbdg)
+![This is an image](https://images.rivals.com/image/upload/f_auto,q_auto,t_large/v0wuctkikgvrerd2pbdg)
 ## Table of Contents:
 ####
 - Project Overview
@@ -84,33 +84,33 @@ Remix IDE was also used for the smart contract development.  The website is **ht
 
 API.env file example 
 
-!![API Example](Images/APIExample.PNG)
+![API Example](./Images/APIExample.png)
 
 Here are some images that illustrate how the Calcutta works
 
 Sidebar with buttons for bid, reclaiming losing bids, giving pot to winner
 
-!![Sidebar](Images/Sidebar.PNG)
+![Sidebar](./Images/Sidebar.png)
 
 Teams In Pool
 
-!![Graphics](Images/TeamsInPool.PNG)
+![Graphics](./Images/TeamsInPool.png)
 
 Arizona Auction Winner
 
-!![Graphics](Images/ArizonaAuctionResult.PNG)
+![Graphics](./Images/ArizonaAuctionResult.png)
 
 Auction In Progress
 
-!![Graphics](Images/PurdueAuctionInProgress.PNG)
+![Graphics](./Images/PurdueAuctionInProgress.png)
 
 Pot Size
 
-!![Pot Size](Images/PotSize.PNG)
+![Pot Size](./Images/PotSize.png)
 
 
 ## Contributors
-Ahmad Sadraei: asadraei@gmail.com, 
+Ahmad Sadraei 
 Vishnu Kurella: vishnu.kurella@gmail.com,
 Lee Copeland: lcopeland44@gmail.com, 
 Ling Zhou: lzhou1688@gmail.com

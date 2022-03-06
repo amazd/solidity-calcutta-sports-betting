@@ -32,6 +32,8 @@
 - Fixed and uniform buy-in in ETH
 - Teams are auctioned off in random order
 - Each bidding period has a time limit; this is currently set at 120 seconds for demo purposes
+- Player with the highest bid will win ownership of a team
+- Player who owns the team that wins the tournament will win the full pot!
 
 ## Installation Guide
 

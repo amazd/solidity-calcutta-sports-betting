@@ -36,8 +36,11 @@
 ## Installation Guide
 
 Install streamlit through the command **pip install streamlit**
+
 Install streamlit_autorefresh through the command **pip install streamlit_autorefresh**
+
 Install web3 through the command **pip install web3==5.17**
+
 Install os through the command **pip install os_sys**
 
 
@@ -77,27 +80,27 @@ Remix IDE was also used for the smart contract development.  The website is **ht
 
 Here are some images that illustrate how the Calcutta works.
 
-API.env file example:
+API.env file example
 
 !![API Example](Images/APIExample.PNG)
 
-Sidebar with buttons for bid, reclaiming losing bids, giving pot to winner:
+Sidebar with buttons for bid, reclaiming losing bids, giving pot to winner
 
 !![Sidebar](Images/Sidebar.PNG)
 
-Teams In Pool:
+Teams In Pool
 
 !![Graphics](Images/TeamsInPool.PNG)
 
-Arizona Auction Winner:
+Arizona Auction Winner
 
 !![Graphics](Images/ArizonaAuctionResult.PNG)
 
-Auction In Progress:
+Auction In Progress
 
 !![Graphics](Images/PurdueAuctionInProgress.PNG)
 
-Pot Size:
+Pot Size
 
 !![Pot Size](Images/PotSize.PNG)
 

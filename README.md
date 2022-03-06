@@ -59,15 +59,10 @@ from streamlit_autorefresh import st_autorefresh
 
 Remix IDE was also used for the smart contract development.  The website is **https://remix.ethereum.org**
 
-## App usage:
-```mermaid
-sequenceDiagram
-```
-
 ## How to enter the pool and use The App
 ####
-- Step 1: Update Smart contract address and web3 provider in API.env file and then type **streamlit run app.py** in a terminal
-- Step 2: Once an auction starts, the dashboard will display 3 items:
+- Update Smart contract address and web3 provider in API.env file and then type **streamlit run app.py** in a terminal
+- Once an auction starts, the dashboard will display 3 items:
     - Time remaining
     - Winning Bidder
     - Highest Bid
@@ -80,7 +75,7 @@ sequenceDiagram
 
 ## Content
 
-Here are some images that illustrate how the Calcutta works:
+Here are some images that illustrate how the Calcutta works.
 
 API.env file example:
 
@@ -96,7 +91,7 @@ Teams In Pool:
 
 Arizona Auction Winner:
 
-![Graphics](Images/ArizonaAuction.PNG)
+![Graphics](Images/ArizonaAuctionResult.PNG)
 
 Auction In Progress:
 
@@ -108,10 +103,10 @@ Pot Size:
 
 
 ## Contributors
-Ahmad Sadraei, asadraei@gmail.com
-Vishnu Kurella, vishnu.kurella@gmail.com
-Lee Copeland, lcopeland44@gmail.com
-Ling Zhou,lzhou1688@gmail.com
+Ahmad Sadraei: asadraei@gmail.com, 
+Vishnu Kurella: vishnu.kurella@gmail.com,
+Lee Copeland: lcopeland44@gmail.com, 
+Ling Zhou: lzhou1688@gmail.com
 
 ## License
 Blitz.LQA 2021

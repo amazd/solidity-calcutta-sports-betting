@@ -79,27 +79,27 @@ Here are some images that illustrate how the Calcutta works.
 
 API.env file example:
 
-![API Example](Images/APIExample.PNG)
+!![API Example](Images/APIExample.PNG)
 
 Sidebar with buttons for bid, reclaiming losing bids, giving pot to winner:
 
-![Sidebar](Images/Sidebar.PNG)
+!![Sidebar](Images/Sidebar.PNG)
 
 Teams In Pool:
 
-![Graphics](Images/TeamsInPool.PNG)
+!![Graphics](Images/TeamsInPool.PNG)
 
 Arizona Auction Winner:
 
-![Graphics](Images/ArizonaAuctionResult.PNG)
+!![Graphics](Images/ArizonaAuctionResult.PNG)
 
 Auction In Progress:
 
-![Graphics](Images/PurdueAuctionInProgress.PNG)
+!![Graphics](Images/PurdueAuctionInProgress.PNG)
 
 Pot Size:
 
-![Pot Size](Images/PotSize.PNG)
+!![Pot Size](Images/PotSize.PNG)
 
 
 ## Contributors

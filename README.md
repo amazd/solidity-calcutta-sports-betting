@@ -64,7 +64,9 @@ Remix IDE was also used for the smart contract development.  The website is **ht
 
 ## How to enter the pool and use The App
 ####
-- Update Smart contract address and web3 provider in API.env file and then type **streamlit run app.py** in a terminal
+- Create API.env file with smart contract address and web3 provider; then use the command **streamlit run app.py** in a terminal
+- The dashboard will show you the teams in play and the current status of all the auctions
+- The sidebar has the functionality to make a bid through dropdown menus for account and team along with a field for bid amount
 - Once an auction starts, the dashboard will display 3 items:
     - Time remaining
     - Winning Bidder
@@ -78,11 +80,11 @@ Remix IDE was also used for the smart contract development.  The website is **ht
 
 ## Content
 
-Here are some images that illustrate how the Calcutta works.
-
-API.env file example
+API.env file example 
 
 !![API Example](Images/APIExample.PNG)
+
+Here are some images that illustrate how the Calcutta works
 
 Sidebar with buttons for bid, reclaiming losing bids, giving pot to winner
 

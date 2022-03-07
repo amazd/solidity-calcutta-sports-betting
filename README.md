@@ -121,7 +121,7 @@ Pot Size
 
 ## Contributors
 Ahmad Sadraei,  
-Vishnu Kurella: vishnu.kurella@gmail.com,
+Vishnu Kurella: vishnu.kurella@gmail.com, 
 Lee Copeland: lcopeland44@gmail.com, 
 Ling Zhou: lzhou1688@gmail.com
 

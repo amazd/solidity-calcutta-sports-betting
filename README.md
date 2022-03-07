@@ -16,7 +16,7 @@
 - Deploy smart contracts to the ETH blockchain for wagering and payout utilities
 - Write contract in Solidity through the use of Remix IDE
 - Users can bid on auctions in a Calcutta betting pool
-
+- Utilize Chainlink to verify the NCAA March Madness Finals winner on 4/4/2022 via ESPN free API (http://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/scoreboard)
 
 ## What is a Calcutta?
 ####
@@ -34,6 +34,14 @@
 - Each bidding period has a time limit; this is currently set at 120 seconds for demo purposes
 - Player with the highest bid will win ownership of a team
 - Player who owns the team that wins the tournament will win the full pot!
+
+## Chainlink Oracle
+####
+- Chainlink is a decentralized oracle protocol that allows real world data to be imported to the blockchain
+- Our smart contract, written in solidity, sends a job request to the Chainlink network
+- The job request sends an API request link as well as the specific location of the data required within the JSON file
+- The job request also offers a reward in Chainlink's native tokens "LINK" to any nodes that do the work to verify the data and put it on the blockchain
+- Our smart contract can then read this data from the Chainlink blockchain and use the winning team to verify and pay the winner of our Calcutta!
 
 ## Installation Guide
 
@@ -79,6 +87,8 @@ Remix IDE was also used for the smart contract development.  The website is **ht
 - After time runs out, the contract will no longer accept bids and the winning bidder will be displayed on the dashboard
 - Losing bids will be refunded upon auction close through clicking a single button
 - Total pot size will be displayed at the bottom of the dashboard
+
+
 
 ## Content
 

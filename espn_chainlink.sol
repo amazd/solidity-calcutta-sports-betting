@@ -8,15 +8,13 @@ import "@chainlink/contracts/src/v0.8/ChainlinkClient.sol";
  * Find information on LINK Token Contracts and get the latest ETH and LINK faucets here: https://docs.chain.link/docs/link-token-contracts/
  */
 
-/**
- * THIS IS AN EXAMPLE CONTRACT WHICH USES HARDCODED VALUES FOR CLARITY.
- * PLEASE DO NOT USE THIS CODE IN PRODUCTION.
- */
 contract APIConsumer is ChainlinkClient {
     using Chainlink for Chainlink.Request;
   
-    bytes32 public ncaaWinner;
-    
+    bytes32 public isTeamOneWinner;
+    bytes32 public teamOne;
+    bytes32 public teamTwo;
+
     address private oracle;
     bytes32 private jobId;
     uint256 private fee;
@@ -38,43 +36,70 @@ contract APIConsumer is ChainlinkClient {
     /**
      * Create a Chainlink request to retrieve API response, find the target
      */
-    function getMarchMadnessWinner() public returns (bytes32 requestId) 
+
+    function getIsTeamOneWinner() public returns (bytes32 requestId1) 
     {
-        Chainlink.Request memory request = buildChainlinkRequest(jobId, address(this), this.fulfill.selector);
+        Chainlink.Request memory request = buildChainlinkRequest(jobId, address(this), this.fulfillWinner.selector);
         
         // Set the URL to perform the GET request on
         request.add("get", "http://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/scoreboard");
         
         // Set the path to find the desired data in the API response, where the response format is:
-        // {"RAW":
-        //   {"ETH":
-        //    {"USD":
-        //     {
-        //      "VOLUME24HOUR": xxx.xxx,
-        //     }
-        //    }
-        //   }
-        //  }
 
-        // note from Ling - https://docs.chain.link/docs/jobs/task-types/jsonparse/ looks like v2 json parse can take the integers
-
-        request.add("path", "events.0.competitions.0.competitors.0.team.shortDisplayName");
-        request.add("path", "events.0.competitions.0.competitors.0.winner");
-        request.add("path", "events.0.competitions.0.competitors.1.team.shortDisplayName");
-        request.add("path", "events.0.competitions.0.competitors.1.winner");
+        request.add("path", "events[0].competitions[0].competitors[0].winner");
         
         // Sends the request
         return sendChainlinkRequestTo(oracle, request, fee);
     }
     
-    /**
-     * Receive the response in the form of bytes32=string
-     */ 
-    function fulfill(bytes32 _requestId, bytes32 _ncaaWinner) public recordChainlinkFulfillment(_requestId)
+    function getTeamOne() public returns (bytes32 requestId2) 
     {
-        ncaaWinner = _ncaaWinner;
+        Chainlink.Request memory request = buildChainlinkRequest(jobId, address(this), this.fulfillTeamOne.selector);
+        
+        // Set the URL to perform the GET request on
+        request.add("get", "http://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/scoreboard");
+        
+        // Set the path to find the desired data in the API response, where the response format is:
+
+        request.add("path", "events[0].competitions[0].competitors[0].team.shortDisplayName");
+
+        // Sends the request
+        return sendChainlinkRequestTo(oracle, request, fee);
     }
 
+    function getTeamTwo() public returns (bytes32 requestId3) 
+    {
+        Chainlink.Request memory request = buildChainlinkRequest(jobId, address(this), this.fulfillTeamTwo.selector);
+        
+        // Set the URL to perform the GET request on
+        request.add("get", "http://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/scoreboard");
+        
+        // Set the path to find the desired data in the API response, where the response format is:
+        request.add("path", "events[0].competitions[0].competitors[1].team.shortDisplayName");
+        
+        
+        // Sends the request
+        return sendChainlinkRequestTo(oracle, request, fee);
+    }
+
+    /**
+     * Receive the response 
+     */ 
+    function fulfillWinner(bytes32 _requestId1, bytes32 _isTeamOneWinner) public recordChainlinkFulfillment(_requestId1)
+    {
+        isTeamOneWinner = _isTeamOneWinner;
+    }
+
+
+    function fulfillTeamOne(bytes32 _requestId2, bytes32 _teamOne) public recordChainlinkFulfillment(_requestId2)
+    {
+        teamOne = _teamOne;
+    }
+
+    function fulfillTeamTwo(bytes32 _requestId3, bytes32 _teamTwo) public recordChainlinkFulfillment(_requestId3)
+    {
+        teamTwo = _teamTwo;
+    }
     // function withdrawLink() external {} - Implement a withdraw function to avoid locking your LINK in the contract
 }
 
